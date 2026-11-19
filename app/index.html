@@ -3,23 +3,88 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>GTA VI trophy checklist</title>
+<title>Leonida Ledger — GTA VI Trophy Guide &amp; Tracker</title>
+<link rel="icon" href="data:,">
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<header>
-  <h1>GTA VI trophy checklist</h1>
-  <p id="progress">0 of 55 earned</p>
+<header class="masthead">
+  <div>
+    <p class="kicker">Grand Theft Auto VI &middot; PlayStation 5 &middot; 55 trophies</p>
+    <h1>Leonida Ledger</h1>
+    <p class="sub">The offline guide &amp; tracker for every GTA VI trophy — official names, descriptions and grades, a checklist that saves in your browser, a roadmap to the platinum, and a cited guide for each trophy.</p>
+  </div>
+  <div class="progress-card" aria-label="Progress">
+    <p class="big-count"><span id="earnedCount">0</span><span class="of"> / 55</span></p>
+    <p class="progress-label">trophies earned</p>
+    <div class="bar"><div id="progressBar" class="fill" style="width:0%"></div></div>
+    <p id="gradeCounts" class="grade-counts"></p>
+    <p id="nextUp" class="next-up"></p>
+  </div>
 </header>
-<div class="controls">
-  <label>Grade <select id="grade"><option value="all">All</option><option value="platinum">Platinum</option><option value="gold">Gold</option><option value="silver">Silver</option><option value="bronze">Bronze</option></select></label>
-  <button id="export" type="button">Export progress</button>
-  <label class="import">Import progress <input id="import" type="file" accept="application/json"></label>
-</div>
-<table>
-  <thead><tr><th>Earned</th><th>Trophy</th><th>Grade</th><th>How to get it</th></tr></thead>
-  <tbody id="rows"></tbody>
-</table>
+
+<nav class="tabs" aria-label="Views">
+  <button type="button" data-view="checklist" class="tab active" aria-pressed="true">Checklist</button>
+  <button type="button" data-view="roadmap" class="tab" aria-pressed="false">Roadmap to Platinum</button>
+  <button type="button" data-view="missable" class="tab" aria-pressed="false">Missable trophies</button>
+  <button type="button" data-view="sources" class="tab" aria-pressed="false">Sources &amp; honesty</button>
+</nav>
+
+<section class="controls" aria-label="Tracker controls">
+  <label class="search">Search <input id="search" type="search" placeholder="Trophy, mission or keyword…" autocomplete="off"></label>
+  <div class="chips" role="group" aria-label="Filter by kind">
+    <button type="button" data-kind="all" class="chip active">All 55</button>
+    <button type="button" data-kind="story" class="chip">Story</button>
+    <button type="button" data-kind="side" class="chip">Stranger strands</button>
+    <button type="button" data-kind="missable" class="chip">Missable</button>
+    <button type="button" data-kind="collectible" class="chip">Collectibles</button>
+    <button type="button" data-kind="activity" class="chip">Activities</button>
+    <button type="button" data-kind="misc" class="chip">Open world</button>
+    <button type="button" data-kind="online" class="chip">Online</button>
+  </div>
+  <label>Grade
+    <select id="grade">
+      <option value="all">All grades</option>
+      <option value="platinum">Platinum</option>
+      <option value="gold">Gold</option>
+      <option value="silver">Silver</option>
+      <option value="bronze">Bronze</option>
+    </select>
+  </label>
+  <label class="toggle"><input id="spoiler" type="checkbox"> Hide story spoilers</label>
+  <label class="toggle"><input id="hideEarned" type="checkbox"> Hide earned</label>
+  <div class="file-buttons">
+    <button id="export" type="button">Export progress</button>
+    <label class="import">Import progress <input id="import" type="file" accept="application/json,.json"></label>
+    <button id="reset" type="button">Reset</button>
+  </div>
+</section>
+<p id="filterNote" class="filter-note" hidden></p>
+
+<main class="layout">
+  <section id="listPane" aria-label="Trophy list">
+    <p id="listSummary" class="list-summary"></p>
+    <ul id="rows" class="rows"></ul>
+    <div id="emptyState" class="empty" hidden></div>
+  </section>
+  <aside id="detailPane" class="detail" aria-label="Trophy guide"></aside>
+</main>
+
+<section id="roadmapPane" class="page" hidden aria-label="Roadmap to the platinum"></section>
+<section id="missablePane" class="page" hidden aria-label="Missable trophies"></section>
+<section id="sourcesPane" class="page" hidden aria-label="Sources and honesty">
+  <h2>Sources &amp; honesty</h2>
+  <p>Every trophy's name, description and grade in this guide is shown as PlayStation publishes it, from the official list as <a href="https://www.exophase.com/game/grand-theft-auto-vi-psn/trophies/">Exophase</a> and <a href="https://psnprofiles.com/trophies/43531-grand-theft-auto-vi">PSNProfiles</a> listed it — the two agree on every name, description and grade. Counts such as 250 stunts or 42 Shooting Range challenges come from those same lists.</p>
+  <p>Each guide is written in our own words for this entry and cites its sources beside it. Where a guide names a place, a count or a step, that fact comes from the official description or from the two list sources. The game released on 19 November 2026 and no complete verified walkthrough exists yet, so where no source has verified a detail — a cryptic description, a trigger nobody has confirmed — the guide says so plainly instead of inventing it. A cited guide beats an uncited one, however detailed; an honest “unverified” beats a confident guess.</p>
+  <p>Missable flags are caution flags built from the official descriptions, not confirmed facts: a trophy tied to a story chapter, a story mission or a stranger strand is flagged “possibly missable” because the descriptions do not say those missions or strands can be replayed. Nothing in the list is flagged missable on evidence beyond the descriptions.</p>
+  <p>There are no online trophies in the official list: all 55 are single-player as described. The “Online” filter therefore shows none, by design.</p>
+  <p>This guide works fully offline. It fetches nothing at run time, sets no cookie and registers no service worker. Your checklist lives only in this browser's localStorage until you export it.</p>
+  <p class="fine">An original guide. No Rockstar Games logo, official artwork, box art or game screenshot is used anywhere in it.</p>
+</section>
+
+<footer>
+  <p>Leonida Ledger — an original, offline, open guide. Official trophy names, descriptions and grades as PlayStation publishes them; guides in our own words, cited beside each trophy.</p>
+</footer>
 <script type="module" src="app.js"></script>
 </body>
 </html>
